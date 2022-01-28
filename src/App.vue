@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-12 mt-5">
         <h3>Add comments</h3>
-        <form @submit.prevent>
+        <form @submit.prevent class="bg-slate-500">
           <input
             @input="name = $event.target.value"
             :value="name"
