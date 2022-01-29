@@ -12,7 +12,7 @@
 </template>
 
 <script lang="js">
-import CommentFormVue from "./components/CommentForm.vue";
+import CommentFormVue from "./components/CommentForm";
 import CommentsListVue from "./components/CommentsList";
 
 export default {
