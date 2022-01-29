@@ -3,45 +3,23 @@
     <div class="row mt-5">
       <div class="col-md-6 offset">
         <div class="card">
-          <div class="card-header d-flex justify-content-between">
-            <form @submit.prevent class="d-flex justify-content-between w-100">
-              <div>
-                <input
-                  @input="name = $event.target.value"
-                  :value="name"
-                  type="text"
-                  placeholder="Enter a name"
-                  class="form-control"
-                />
-                <input
-                  @input="email = $event.target.value"
-                  :value="email"
-                  type="email"
-                  placeholder="Enter a email"
-                  class="form-control"
-                />
-              </div>
-              <button @click="createCommit" class="btn btn-success ml-3">
-                Add
-              </button>
-            </form>
-          </div>
-          <div
-            class="card-body"
-            v-for="comment in comments"
-            v-bind:key="comment.id"
-          >
-            <p><b>Name:</b> {{ comment.name }}</p>
-            <p><b>Email:</b> {{ comment.email }}</p>
-          </div>
+          <comment-form-vue @addComment="createCommit" />
+          <comments-list-vue :comments="comments" />
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="js">
+import CommentFormVue from "./components/CommentForm.vue";
+import CommentsListVue from "./components/CommentsList";
+
 export default {
+  components: {
+    CommentFormVue,
+    CommentsListVue,
+  },
   data() {
     return {
       comments: [
@@ -61,20 +39,12 @@ export default {
           email: "ehsmat@luli.ru",
         },
       ],
-      name: "",
-      email: "",
+
     };
   },
   methods: {
-    createCommit() {
-      const newCommit = {
-        id: Date.now(),
-        name: this.name,
-        email: this.email,
-      };
-      this.comments.push(newCommit);
-      this.name = "";
-      this.email = "";
+    createCommit(comment) {
+      this.comments.push(comment);
     },
   },
 };
