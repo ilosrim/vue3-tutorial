@@ -8,6 +8,11 @@
       @click="showModal"
       >Add New Comments
     </my-btn>
+    <my-select
+      class="w-1/6 ml-3"
+      v-model="selectedSort"
+      :options="selectOptions"
+    />
   </div>
 </template>
 <script>
@@ -16,6 +21,15 @@ export default {
     showModal: {
       type: Function,
     },
+  },
+  data() {
+    return {
+      selectedSort: "",
+      selectOptions: [
+        { value: "name", name: "Filter by name" },
+        { value: "email", name: "Filter by email" },
+      ],
+    };
   },
 };
 </script>
