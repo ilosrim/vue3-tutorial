@@ -7,7 +7,14 @@
           <my-modal v-model:show="modalVissable">
             <my-form-vue @add="createComment" />
           </my-modal>
-          <list-vue :comments="comments" @remove="removeComment" />
+          <div v-if="!isLoading">
+            <list-vue :comments="comments" @remove="removeComment" />
+          </div>
+          <div v-else class="text-center">
+            <div class="spinner-border text-primary m-5" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -19,6 +26,7 @@ import MyFormVue from "./components/MyForm";
 import ListVue from "./components/List";
 import NavbarVue from "./components/Navbar";
 import MyModal from "./components/UI/MyModal";
+import axios from "axios";
 
 export default {
   components: {
@@ -29,11 +37,9 @@ export default {
   },
   data() {
     return {
-      comments: [
-        { id: 1, name: "Tolib", passwd: "1234" },
-        { id: 2, name: "G'olib", passwd: "4321" },
-      ],
+      comments: [],
       modalVissable: false,
+      isLoading: false,
     };
   },
   methods: {
@@ -47,6 +53,24 @@ export default {
     showModal() {
       this.modalVissable = true;
     },
+    async fetchComment() {
+      try {
+        this.isLoading = true;
+        const response = await axios.get(
+          "https://jsonplaceholder.typicode.com/comments?_limit=10"
+        );
+        setTimeout(() => {
+          console.log(response.data);
+          this.comments = response.data;
+          this.isLoading = false;
+        }, 2000);
+      } catch (e) {
+        console.log(e);
+      }
+    },
+  },
+  mounted() {
+    this.fetchComment();
   },
 };
 </script>

@@ -2,7 +2,8 @@
   <div class="flex justify-between items-center">
     <div>
       <h3><b>Name: </b>{{ comment.name }}</h3>
-      <h3><b>Password: </b>{{ comment.passwd }}</h3>
+      <h3><b>Email: </b>{{ comment.email }}</h3>
+      <h4><b>Body:</b> {{ comment.body }}</h4>
     </div>
     <div>
       <my-btn @click="$emit('remove', comment)" class="btn btn-danger"

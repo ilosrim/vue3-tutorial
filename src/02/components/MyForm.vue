@@ -8,10 +8,16 @@
         placeholder="Enter a name"
       />
       <my-input
-        v-model="comment.passwd"
+        v-model="comment.email"
         type="passwd"
         class="form-control my-3"
-        placeholder="Enter a password"
+        placeholder="Enter a email"
+      />
+      <my-input
+        v-model="comment.body"
+        type="passwd"
+        class="form-control my-3"
+        placeholder="Enter a body"
       />
       <my-btn @click="createComment" class="btn btn-success float-right">
         Add comments
